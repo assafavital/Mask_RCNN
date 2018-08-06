@@ -32,16 +32,16 @@ class ParallelModel(KM.Model):
         keras_model: The Keras model to parallelize
         gpu_count: Number of GPUs. Must be > 1
         """
+        super(ParallelModel, self).__init__(inputs=self.inner_model.inputs,
+                                            outputs=merged_outputs)
         self.inner_model = keras_model
         self.gpu_count = gpu_count
         merged_outputs = self.make_parallel()
-        super(ParallelModel, self).__init__(inputs=self.inner_model.inputs,
-                                            outputs=merged_outputs)
+
 
     def __getattribute__(self, attrname):
         """Redirect loading and saving methods to the inner model. That's where
         the weights are stored."""
-        super(ParallelModel, self).__init__()
         if 'load' in attrname or 'save' in attrname:
             return getattr(self.inner_model, attrname)
         return super(ParallelModel, self).__getattribute__(attrname)
