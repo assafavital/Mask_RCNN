@@ -34,6 +34,10 @@ import json
 import datetime
 import numpy as np
 import skimage.draw
+import cloudstorage as gcs
+from google.appengine.api import app_identity
+import logging
+import webapp2
 
 # Root directory of the project
 ROOT_DIR = os.path.abspath("../../")
@@ -57,14 +61,15 @@ DEFAULT_LOGS_DIR = os.path.join(ROOT_DIR, "logs")
 class GlobersonConfig(Config):
 
     NAME = "globerson"
-    IMAGES_PER_GPU = 1
+    IMAGES_PER_GPU = 10
     NUM_CLASSES = 2
     STEPS_PER_EPOCH = 1
     DETECTION_MIN_CONFIDENCE = 0.9
 
+
 class GlobersonDataset(utils.Dataset):
 
-    def __init__(self, dataset_dir):
+    def __init__(self):
         super(GlobersonDataset, self).__init__()
         self.dataset_dir = dataset_dir
 
@@ -78,6 +83,7 @@ class GlobersonDataset(utils.Dataset):
                     "globerson",
                     image_id=id,
                     path=os.path.join(self.dataset_dir, image_id))
+                break
 
     def load_mask(self, image_id):
         info = self.image_info[image_id]
