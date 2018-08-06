@@ -66,7 +66,7 @@ class GlobersonConfig(Config):
 
 class GlobersonDataset(utils.Dataset):
 
-    def __init__(self):
+    def __init__(self, dataset_dir):
         super(GlobersonDataset, self).__init__()
         self.dataset_dir = dataset_dir
 
