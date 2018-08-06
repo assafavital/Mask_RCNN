@@ -61,7 +61,7 @@ class GlobersonConfig(Config):
     NUM_CLASSES = 2
     STEPS_PER_EPOCH = 1
     DETECTION_MIN_CONFIDENCE = 0.9
-    GPU_COUNT = 1
+    GPU_COUNT = 2
 
 
 class GlobersonDataset(utils.Dataset):
