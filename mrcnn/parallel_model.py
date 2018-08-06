@@ -41,6 +41,7 @@ class ParallelModel(KM.Model):
     def __getattribute__(self, attrname):
         """Redirect loading and saving methods to the inner model. That's where
         the weights are stored."""
+        super(ParallelModel, self).__init__()
         if 'load' in attrname or 'save' in attrname:
             return getattr(self.inner_model, attrname)
         return super(ParallelModel, self).__getattribute__(attrname)
