@@ -34,10 +34,6 @@ import json
 import datetime
 import numpy as np
 import skimage.draw
-import cloudstorage as gcs
-from google.appengine.api import app_identity
-import logging
-import webapp2
 
 # Root directory of the project
 ROOT_DIR = os.path.abspath("../../")
@@ -65,6 +61,7 @@ class GlobersonConfig(Config):
     NUM_CLASSES = 2
     STEPS_PER_EPOCH = 1
     DETECTION_MIN_CONFIDENCE = 0.9
+    GPU_COUNT = 1
 
 
 class GlobersonDataset(utils.Dataset):
@@ -410,3 +407,5 @@ if __name__ == '__main__':
     else:
         print("'{}' is not recognized. "
               "Use 'train' or 'splash'".format(args.command))
+
+    model.detect(
