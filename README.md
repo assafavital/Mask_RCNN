@@ -124,6 +124,15 @@ all available in one dataset.
 
 See examples in `samples/shapes/train_shapes.ipynb`, `samples/coco/coco.py`, `samples/balloon/balloon.py`, and `samples/nucleus/nucleus.py`.
 
+# Training Globerson
+Enter /home/assaf_avital9_gmail_com/scripts and there run:
+    sh run_globi.sh
+This runs the globerson net on a single image
+The image and the corresponding silhuette are at tmp_ds directory
+In order to see the logs - from scripts run:
+    python3 check_logs.py /logs/<folder of specific run>
+
+
 ## Differences from the Official Paper
 This implementation follows the Mask RCNN paper for the most part, but there are a few cases where we deviated in favor of code simplicity and generalization. These are some of the differences we're aware of. If you encounter other differences, please do let us know.
 
